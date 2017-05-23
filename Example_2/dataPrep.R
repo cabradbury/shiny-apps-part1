@@ -25,7 +25,7 @@ if(file.exists("./data/Crime Stats.csv") == TRUE) {
 crimeData$INC.NUMBER <- as.factor(crimeData$INC.NUMBER)
 crimeData$OCCURRED.ON <- as.POSIXlt(crimeData$OCCURRED.ON, format = "%m/%d/%Y %H:%M")
 crimeData$OCCURRED.TO <- as.POSIXlt(crimeData$OCCURRED.TO, format = "%m/%d/%Y %H:%M")
-crimeData$UCR.CRIME.CATEGORY <- as.factor(crimeData$UCR.CRIME.CATEGORY)
+crimeData$UCR.CRIME.CATEGORY <- as.character(crimeData$UCR.CRIME.CATEGORY)
 crimeData$X100.BLOCK.ADDR <- as.character(crimeData$X100.BLOCK.ADDR)
 crimeData$ZIP <- as.factor(crimeData$ZIP)
 crimeData$PREMISE.TYPE<- as.character(crimeData$PREMISE.TYPE)

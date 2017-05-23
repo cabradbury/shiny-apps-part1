@@ -16,8 +16,6 @@
 library(shiny)
 library(zoo)
 
-
-
 # Define server-side logic for loading data, 
 # generating plots and other items. All variables
 # are loaded as an element of the "output" variable.
@@ -30,7 +28,7 @@ shinyServer(function(input, output) {
   # this will be rendered as a control widget in the UI. Basically, we prep everything
   # here and then simply display it on the UI side with a uiOutput()
   output$chooseCategory <- renderUI({
-    selectInput("category", "Select a Category:", as.list(unique(crimeData$UCR.CRIME.CATEGORY)))
+    selectInput("category", "Select a Category:", as.list(unique(crimeData$UCR.CRIME.CATEGORY)), selected = as.list(unique(crimeData$UCR.CRIME.CATEGORY))[[1]])
   })
   
   # Create a table of the data set for the users reference. A simple renderTable can be
@@ -47,8 +45,10 @@ shinyServer(function(input, output) {
   # option selected is stored. 
   output$crimesByMonthBarChart <- renderPlot({
     crimeDataRefined <- subset(crimeData, as.factor(crimeData$UCR.CRIME.CATEGORY) == input$category)
-    crimesByMonth <- setNames(aggregate(crimeDataRefined$INC.NUMBER~as.yearmon(crimeDataRefined$OCCURRED.ON), data=crimeDataRefined, FUN = length), c("Month", "Count"))
-    barplot(crimesByMonth$Count, ylab="Count", names.arg = crimesByMonth$Month, las=2)
+    if(nrow(crimeDataRefined) > 0) {
+      crimesByMonth <- setNames(aggregate(crimeDataRefined$INC.NUMBER~as.yearmon(crimeDataRefined$OCCURRED.ON), data=crimeDataRefined, FUN = length), c("Month", "Count"))
+      barplot(crimesByMonth$Count, ylab="Count", names.arg = crimesByMonth$Month, las=2)
+    }
   })
   
 })

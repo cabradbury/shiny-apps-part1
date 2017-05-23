@@ -43,7 +43,7 @@ shinyUI(fluidPage(
       tabsetPanel(
         
         tabPanel("Crimes by Month", plotOutput("crimesByMonthBarChart")), # This will be the plots of the data
-        tabPanel("Data", dataTableOutput("crimeDataTable")) # This will be the data table.
+        tabPanel("Raw Data", dataTableOutput("crimeDataTable")) # This will be the data table.
   
       )
     )
