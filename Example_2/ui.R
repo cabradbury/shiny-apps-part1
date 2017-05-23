@@ -1,24 +1,32 @@
 #
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
+# Phoenix R Users Group
+# May 23, 2017
 #
-# Find out more about building applications with Shiny here:
-# 
-#    http://shiny.rstudio.com/
+# Shiny Application Development - Part I
+# Example 2
+#
+# Author: Charles Bradbury
+#
+# About:
+# ui.R: Presentation layer for the application.
 #
 
 library(shiny)
 
-# Define UI for application that draws a histogram
+# Define a baisc page, most defaults are a fluidPage which is 
+# responsive, allowing it to adjust to different screen sizes.
 shinyUI(fluidPage(
   
-  # Application title
+  # Application title. This will be shown at the top of the application.
   titlePanel("Phoenix Crime Data"),
   
-  # Sidebar with a slider input for number of bins 
+  # Create a sidebar layout so we have both a body and a sidebar. By default
+  # the sidebar will be on the left-hand side.
   sidebarLayout(
     
-    # Contents of the sidebar
+    # Contents of the sidebar. Let's provide a breif description 
+    # and some reactive functionality via the selectInput() / renderUI()
+    # we created in the server.R code.
     sidebarPanel(
       h4("Background"),
        p("This dashboard displays some basic statistics for crime data in Phoenix, AZ. These data cover the time period between
@@ -34,8 +42,8 @@ shinyUI(fluidPage(
       # Create a tab panel for easier user nagivation.
       tabsetPanel(
         
-        tabPanel("Crimes by Month", plotOutput("crimesByMonthBarChart")),
-        tabPanel("Data", dataTableOutput("crimeDataTable"))
+        tabPanel("Crimes by Month", plotOutput("crimesByMonthBarChart")), # This will be the plots of the data
+        tabPanel("Data", dataTableOutput("crimeDataTable")) # This will be the data table.
   
       )
     )

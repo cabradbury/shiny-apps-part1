@@ -1,3 +1,17 @@
+#
+# Phoenix R Users Group
+# May 23, 2017
+#
+# Shiny Application Development - Part I
+# Example 2
+#
+# Author: Charles Bradbury
+#
+# About:
+# dataPrep.R: Code to obtain and prepare the data prior to displaying
+#             it in the shiny application.
+#
+
 # Get data, if it hasn't already been loaded. 
 if(file.exists("./data/Crime Stats.csv") == TRUE) {
   crimeData <- read.csv("./data/Crime Stats.csv")
@@ -6,7 +20,8 @@ if(file.exists("./data/Crime Stats.csv") == TRUE) {
   crimeData <- read.csv("./data/Crime Stats.csv")
 }
 
-# Clean and prepare data.
+# Clean and prepare data. Let's change some data types to make it 
+# easier to sort, plot and filter results.
 crimeData$INC.NUMBER <- as.factor(crimeData$INC.NUMBER)
 crimeData$OCCURRED.ON <- as.POSIXlt(crimeData$OCCURRED.ON, format = "%m/%d/%Y %H:%M")
 crimeData$OCCURRED.TO <- as.POSIXlt(crimeData$OCCURRED.TO, format = "%m/%d/%Y %H:%M")
